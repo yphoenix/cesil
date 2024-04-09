@@ -1,8 +1,8 @@
 {
   "name": "cesil",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "CESIL Interpreter",
-  "license": "Copyright (c) 2024 FNIX Enterprises",
+  "license": "MIT",
   "author": "Yorick Phoenix <yphoenix@scribblings.com>",
   "main": "src/cesil.js",
   "type": "module",

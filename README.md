@@ -4,14 +4,17 @@ CESIL Language Interpreter in JavaScript
 ## Install
 ### Globally
 ```
-npm install -g package.json
+npm install -g cesil
 ```
-
 ### Run (globally)
 ```
 cesil file.ces
 ```
 
+### Locally
+```
+npm install cesil
+```
 ### Run (locally)
 ```
 npm run cesil file.ces
@@ -19,9 +22,6 @@ npm run cesil file.ces
 // or
 
 node src/cesilCLI.js file.ces
-
-// or
-
 ```
 
 ## Language information
