@@ -1,0 +1,37 @@
+{
+  "name": "cesil",
+  "version": "1.0.0",
+  "description": "CESIL Interpreter",
+  "license": "Copyright (c) 2024 FNIX Enterprises",
+  "author": "Yorick Phoenix <yphoenix@scribblings.com>",
+  "main": "src/cesil.js",
+  "type": "module",
+  "devDependencies": {
+    "@biomejs/biome": "1.6.4",
+	"@eslint/config-inspector": "^0.4.3",
+    "eslint": "^9.0.0",
+    "eslint-plugin-jsdoc": "^48.2.3",
+    "eslint-plugin-new-with-error": "^5.0.0",
+    "eslint-plugin-no-use-extend-native": "^0.5.0",
+    "oxlint": "^0.2.16"
+  },
+  "scripts": {
+    "oxlint": "oxlint -D all -A restriction -A pedantic -A style -A nursery -A prefer-add-event-listener -A no-document-cookie -A no-new-array --ignore-pattern=**/node_modules/**",
+    "cesil": "node src/cesilCLI.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yphoenix/cesil.git"
+  },
+  "keywords": [
+    "cesil"
+  ],
+  "author": "Yorick Phoenix",
+  "bugs": {
+    "url": "https://github.com/yphoenix/cesil/issues"
+  },
+  "homepage": "https://github.com/yphoenix/cesil#readme",
+  "bin": {
+    "cesil": "src/cesilCLI.js"
+  }
+}

@@ -1,0 +1,52 @@
+{
+    "$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
+	"files": {
+		"ignore": [
+			"*/package.json"
+		],
+	    "ignoreUnknown": true
+	},
+    "linter": {
+    	"enabled": true,
+    	"ignore": [],
+    	"rules": {
+    	   	"recommended": true,
+    		"complexity": {
+				"noThisInStatic": "warn",
+				"useArrowFunction": "off",
+           		"useSimplifiedLogicExpression": "off",
+				"useOptionalChain": "off",
+				"noForEach": "off",
+				"noUselessSwitchCase": "off",
+				"noStaticOnlyClass": "off",
+				"noUselessThisAlias": "off",
+				"useLiteralKeys": "off"
+    		},
+    		"performance": {
+           		"noDelete": "off"
+    		},
+    		"style": {
+				"noUselessElse": "warn",
+				"useExponentiationOperator": "off",
+				"useSingleCaseStatement": "off",
+				"useSingleVarDeclarator": "off",
+				"useTemplate": "off",
+				"noArguments": "off",
+				"noNegationElse": "off",
+				"noVar": "off",
+				"noParameterAssign": "off"
+    		},
+    		"suspicious": {
+           		"noAssignInExpressions": "warn",
+				"noFallthroughSwitchClause": "off",
+				"noRedundantUseStrict": "off"
+    		}
+		}
+	},
+	"json": {
+    	"parser": {
+        	"allowComments": true,
+	    	"allowTrailingCommas": false
+		}
+	}
+}
