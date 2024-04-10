@@ -30,5 +30,5 @@ https://en.wikipedia.org/wiki/CESIL
 
 ### Example files
 
-Can be found in the examples folder
+Can be found in the examples folder: https://github.com/yphoenix/cesil/tree/main/examples
 
