@@ -1,0 +1,69 @@
+* Non-integer division
+* CESIL Code (c) S Robinson, 2003
+
+Next	LOAD 8
+	STORE DP
+* Display results to a maximum of 8 decimal places
+
+	IN
+	STORE a
+	JINEG End
+	OUT
+	PRINT " / "
+	IN
+	STORE b
+	OUT
+	JIZERO Zero
+	PRINT " = "
+	LOAD a
+	DIVIDE b
+	OUT
+	MULTIPLY b
+	SUBTRACT a
+	JIZERO Done
+	MULTIPLY -1
+	PRINT "."
+
+Loop	MULTIPLY 10
+	STORE a
+	DIVIDE b
+	OUT
+	MULTIPLY b
+	SUBTRACT a
+	JIZERO Done
+	MULTIPLY -1
+	STORE a
+	LOAD DP
+	SUBTRACT 1
+	JIZERO Done
+	STORE DP
+	LOAD a
+	JUMP Loop	
+
+Zero	PRINT " - Error - attempting to divide by zero"
+
+Done	LINE
+	JUMP Next
+
+End	HALT
+
+	%
+	22
+	7
+
+	355
+	113	
+
+	1
+	4
+
+	5
+	9
+
+	3
+	0
+
+	12
+	4
+
+	-1

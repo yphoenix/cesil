@@ -1,0 +1,43 @@
+* Example 2: Calculate the GCD of a pair of numbers
+*
+* Copyright (C)2002-2003 Andrew Jacobs
+* All rights reserved.
+
+* Read in the two numbers
+
+	PRINT	"The GCD of "
+	IN
+	STORE	A
+	OUT
+	PRINT 	" and "
+	IN
+	STORE	B
+	OUT
+
+* Compare A & B
+
+GCD	LOAD	A
+	SUBTRACT B
+	JIZERO	DONE
+	JINEG	BIGB
+
+	STORE	A
+	JUMP	GCD
+
+BIGB	MULTIPLY -1
+	STORE	B
+	JUMP	GCD
+
+* Display the GCD
+
+DONE	PRINT	" = "
+	LOAD	A
+	OUT
+	LINE
+	HALT
+
+* The numbers to use
+
+	%
+	45
+	81

@@ -1,0 +1,133 @@
+* Example 4: Printing Roman Numerals
+*
+* Copyright (C)2003 Andrew Jacobs
+* All rights reserved.
+
+* Read the next value, a negative number marks the end
+
+READ	IN
+	JINEG	FINISH
+	STORE	VALUE
+
+* Print out the value and some flavour text
+
+	OUT
+	PRINT	" = "
+	JIZERO	ZERO
+
+* Then start decomposing the value into numerals
+
+M	LOAD	VALUE
+	SUBTRACT 1000
+	JINEG	CM
+	STORE	VALUE
+	PRINT	"M"
+	JUMP	M
+
+CM	LOAD	VALUE
+	SUBTRACT 900
+	JINEG	D
+	STORE	VALUE
+	PRINT	"CM"
+
+D	LOAD	VALUE
+	SUBTRACT 500
+	JINEG	CD
+	STORE	VALUE
+	PRINT	"D"
+
+CD	LOAD	VALUE
+	SUBTRACT 400
+	JINEG	C
+	STORE	VALUE
+	PRINT	"CD"
+
+C	LOAD	VALUE
+	SUBTRACT 100
+	JINEG	XC
+	STORE	VALUE
+	PRINT	"C"
+	JUMP	C
+
+XC	LOAD	VALUE
+	SUBTRACT 90
+	JINEG	L
+	STORE	VALUE
+	PRINT	"XC"
+
+L	LOAD	VALUE
+	SUBTRACT 50
+	JINEG	XL
+	STORE	VALUE
+	PRINT	"L"
+	JUMP	L
+
+XL	LOAD	VALUE
+	SUBTRACT 40
+	JINEG	X
+	STORE	VALUE
+	PRINT	"XL"
+
+X	LOAD	VALUE
+	SUBTRACT 10
+	JINEG	IX
+	STORE	VALUE
+	PRINT	"X"
+	JUMP	X
+
+IX	LOAD	VALUE
+	SUBTRACT 9
+	JINEG	V
+	STORE	VALUE
+	PRINT	"IX"
+	JUMP	DONE
+
+V	LOAD	VALUE
+	SUBTRACT 5
+	JINEG	IV
+	STORE	VALUE
+	PRINT	"V"
+	JUMP	V
+
+IV	LOAD	VALUE
+	SUBTRACT 4
+	JINEG	I
+	STORE	VALUE
+	PRINT	"IV"
+	JUMP	DONE
+
+I	LOAD	VALUE
+	SUBTRACT 1
+	JINEG	DONE
+	STORE	VALUE
+	PRINT	"I"
+	JUMP	I
+
+* Handle zero specially
+
+ZERO	PRINT	"No numerals for zero"
+
+* Finished conversion, try for another value
+
+DONE	LINE
+	JUMP	READ
+
+FINISH	HALT
+
+* Some numbers to convert to numerals
+
+	%
+	1
+	2
+	3
+	4
+	8
+	9
+	10
+	49
+	99
+	666
+	2003
+	1999
+	1444
+	-1

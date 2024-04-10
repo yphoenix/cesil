@@ -30,4 +30,5 @@ https://en.wikipedia.org/wiki/CESIL
 
 ### Example files
 
-Can be found at: https://sourceforge.net/p/cesil/code/HEAD/tree/Files/trunk/
+Can be found in the examples folder
+

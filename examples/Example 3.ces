@@ -1,0 +1,100 @@
+* Example 3: A spot of sideways graph plotting
+*
+* Copyright (C)2002-2003 Andrew Jacobs
+* All rights reserved.
+
+	PRINT "   0    10   20   30   40   50   60   70   80   90   100%"
+	LINE
+	PRINT "   +----+----+----+----+----+----+----+----+----+----+"
+	LINE
+
+* Read the next value, stop when its negative
+
+READ	IN
+	JINEG	FINISH
+
+* Save the original value and the scaled bar length
+
+	STORE	VALUE
+	DIVIDE	2
+	STORE	COUNT
+
+* Print the first part of the bar
+
+	PRINT 	"   |"
+	LOAD	COUNT
+	JIZERO	DONE1
+	SUBTRACT 1
+LOOP1	JIZERO	MARK1
+	PRINT	"-"
+	SUBTRACT 1
+	JUMP	LOOP1
+MARK1	PRINT "+"
+DONE1	LINE
+
+* Print an appropriate space padding
+
+	LOAD	VALUE
+	SUBTRACT 100
+	JINEG	PAD1
+	JUMP	LABEL
+
+PAD1	PRINT	" "
+	LOAD	VALUE
+	SUBTRACT 10
+	JINEG	PAD2
+	JUMP	LABEL
+
+PAD2	PRINT	" "
+
+* Then print the value
+
+LABEL	LOAD	VALUE
+	OUT
+
+* And the middle of the bar
+
+	PRINT	"|"
+	LOAD	COUNT
+	JIZERO	DONE2
+	SUBTRACT 1
+LOOP2	JIZERO	MARK2
+	PRINT	" "
+	SUBTRACT 1
+	JUMP	LOOP2
+MARK2	PRINT "|"
+DONE2	LINE
+
+* Print the third part of the bar
+
+	PRINT 	"   |"
+	LOAD	COUNT
+	JIZERO	DONE3
+	SUBTRACT 1
+LOOP3	JIZERO	MARK3
+	PRINT	"-"
+	SUBTRACT 1
+	JUMP	LOOP3
+MARK3	PRINT "+"
+DONE3	LINE
+
+* Repeat for the next data value
+
+	JUMP	READ
+
+* All done, stop the program
+
+FINISH	HALT
+
+* The values to plot 0 to 100%, -1 to end
+
+	%
+	0
+	84
+	25
+	50
+	32
+	75
+	7
+	100
+	-1

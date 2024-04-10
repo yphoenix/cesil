@@ -1,0 +1,441 @@
+* Solving the Eight Queens Problem in CESIL
+*
+* Copyright (C)2010 Andrew Jacobs
+* All rights reserved.
+*
+* This program works out all the ways that eight queens can be placed
+* on a standard chess board such that they can't take each other.
+
+		PRINT		"Searching for solutions - This may take a while"
+		LINE
+		LINE
+
+* Set the current solution count to zero
+
+		LOAD		0
+		STORE		COUNT
+
+* Start the first queen
+
+		LOAD		8
+		STORE		Q1
+
+* Start the second queen
+
+LOOP1		LOAD		8
+		STORE		Q2
+
+* Is the Q2 on the same row or diagonal as Q1?
+
+LOOP2		LOAD		Q1
+		SUBTRACT 	Q2
+		JIZERO		NEXT2
+ABS12		MULTIPLY 	-1
+		JINEG		ABS12
+		SUBTRACT	1
+		JIZERO		NEXT2
+
+* No, start the third queen
+
+		LOAD		8
+		STORE		Q3
+
+* Is the Q3 on the same row or diagonal as Q1 or Q2? 
+
+LOOP3		LOAD		Q1
+		SUBTRACT 	Q3
+		JIZERO		NEXT3
+ABS13		MULTIPLY 	-1
+		JINEG		ABS13
+		SUBTRACT	2
+		JIZERO		NEXT3
+
+		LOAD		Q2
+		SUBTRACT 	Q3
+		JIZERO		NEXT3
+ABS23		MULTIPLY 	-1
+		JINEG		ABS23
+		SUBTRACT	1
+		JIZERO		NEXT3
+
+* No, start the fourth queen
+
+		LOAD		8
+		STORE		Q4
+
+* Is the Q4 on the same row or diagonal as Q1, Q2 or Q3? 
+
+LOOP4		LOAD		Q1
+		SUBTRACT 	Q4
+		JIZERO		NEXT4
+ABS14		MULTIPLY 	-1
+		JINEG		ABS14
+		SUBTRACT	3
+		JIZERO		NEXT4
+
+		LOAD		Q2
+		SUBTRACT 	Q4
+		JIZERO		NEXT4
+ABS24		MULTIPLY 	-1
+		JINEG		ABS24
+		SUBTRACT	2
+		JIZERO		NEXT4
+
+		LOAD		Q3
+		SUBTRACT 	Q4
+		JIZERO		NEXT4
+ABS34		MULTIPLY 	-1
+		JINEG		ABS34
+		SUBTRACT	1
+		JIZERO		NEXT4
+
+* No, start the fifth queen
+
+		LOAD		8
+		STORE		Q5
+
+* Is the Q5 on the same row or diagonal as Q1, Q2, Q3 or Q4? 
+
+LOOP5		LOAD		Q1
+		SUBTRACT 	Q5
+		JIZERO		NEXT5
+ABS15		MULTIPLY 	-1
+		JINEG		ABS15
+		SUBTRACT	4
+		JIZERO		NEXT5
+
+		LOAD		Q2
+		SUBTRACT 	Q5
+		JIZERO		NEXT5
+ABS25		MULTIPLY 	-1
+		JINEG		ABS25
+		SUBTRACT	3
+		JIZERO		NEXT5
+
+		LOAD		Q3
+		SUBTRACT 	Q5
+		JIZERO		NEXT5
+ABS35		MULTIPLY 	-1
+		JINEG		ABS35
+		SUBTRACT	2
+		JIZERO		NEXT5
+
+		LOAD		Q4
+		SUBTRACT 	Q5
+		JIZERO		NEXT5
+ABS45		MULTIPLY 	-1
+		JINEG		ABS45
+		SUBTRACT	1
+		JIZERO		NEXT5
+
+* No, start the sixth queen
+
+		LOAD		8
+		STORE		Q6
+
+* Is the Q6 on the same row or diagonal as Q1, Q2, Q3, Q4 or Q5? 
+
+LOOP6		LOAD		Q1
+		SUBTRACT 	Q6
+		JIZERO		NEXT6
+ABS16		MULTIPLY 	-1
+		JINEG		ABS16
+		SUBTRACT	5
+		JIZERO		NEXT6
+
+		LOAD		Q2
+		SUBTRACT 	Q6
+		JIZERO		NEXT6
+ABS26		MULTIPLY 	-1
+		JINEG		ABS26
+		SUBTRACT	4
+		JIZERO		NEXT6
+
+		LOAD		Q3
+		SUBTRACT 	Q6
+		JIZERO		NEXT6
+ABS36		MULTIPLY 	-1
+		JINEG		ABS36
+		SUBTRACT	3
+		JIZERO		NEXT6
+
+		LOAD		Q4
+		SUBTRACT 	Q6
+		JIZERO		NEXT6
+ABS46		MULTIPLY 	-1
+		JINEG		ABS46
+		SUBTRACT	2
+		JIZERO		NEXT6
+
+		LOAD		Q5
+		SUBTRACT 	Q6
+		JIZERO		NEXT6
+ABS56		MULTIPLY 	-1
+		JINEG		ABS56
+		SUBTRACT	1
+		JIZERO		NEXT6
+
+* No, start the seventh queen
+
+		LOAD		8
+		STORE		Q7
+
+* Is the Q7 on the same row or diagonal as Q1, Q2, Q3, Q4, Q5 or Q6? 
+
+LOOP7		LOAD		Q1
+		SUBTRACT 	Q7
+		JIZERO		NEXT7
+ABS17		MULTIPLY 	-1
+		JINEG		ABS17
+		SUBTRACT	6
+		JIZERO		NEXT7
+
+		LOAD		Q2
+		SUBTRACT 	Q7
+		JIZERO		NEXT7
+ABS27		MULTIPLY 	-1
+		JINEG		ABS27
+		SUBTRACT	5
+		JIZERO		NEXT7
+
+		LOAD		Q3
+		SUBTRACT 	Q7
+		JIZERO		NEXT7
+ABS37		MULTIPLY 	-1
+		JINEG		ABS37
+		SUBTRACT	4
+		JIZERO		NEXT7
+
+		LOAD		Q4
+		SUBTRACT 	Q7
+		JIZERO		NEXT7
+ABS47		MULTIPLY 	-1
+		JINEG		ABS47
+		SUBTRACT	3
+		JIZERO		NEXT7
+
+		LOAD		Q5
+		SUBTRACT 	Q7
+		JIZERO		NEXT7
+ABS57		MULTIPLY 	-1
+		JINEG		ABS57
+		SUBTRACT	2
+		JIZERO		NEXT7
+
+		LOAD		Q6
+		SUBTRACT 	Q7
+		JIZERO		NEXT7
+ABS67		MULTIPLY 	-1
+		JINEG		ABS67
+		SUBTRACT	1
+		JIZERO		NEXT7
+
+* No, start the eighth queen
+
+		LOAD		8
+		STORE		Q8
+
+* Is the Q8 on the same row or diagonal as Q1, Q2, Q3, Q4, Q5, Q6 or Q7? 
+
+LOOP8		LOAD		Q1
+		SUBTRACT 	Q8
+		JIZERO		NEXT8
+ABS18		MULTIPLY 	-1
+		JINEG		ABS18
+		SUBTRACT	7
+		JIZERO		NEXT8
+
+		LOAD		Q2
+		SUBTRACT 	Q8
+		JIZERO		NEXT8
+ABS28		MULTIPLY 	-1
+		JINEG		ABS28
+		SUBTRACT	6
+		JIZERO		NEXT8
+
+		LOAD		Q3
+		SUBTRACT 	Q8
+		JIZERO		NEXT8
+ABS38		MULTIPLY 	-1
+		JINEG		ABS38
+		SUBTRACT	5
+		JIZERO		NEXT8
+
+		LOAD		Q4
+		SUBTRACT 	Q8
+		JIZERO		NEXT8
+ABS48		MULTIPLY 	-1
+		JINEG		ABS48
+		SUBTRACT	4
+		JIZERO		NEXT8
+
+		LOAD		Q5
+		SUBTRACT 	Q8
+		JIZERO		NEXT8
+ABS58		MULTIPLY 	-1
+		JINEG		ABS58
+		SUBTRACT	3
+		JIZERO		NEXT8
+
+		LOAD		Q6
+		SUBTRACT 	Q8
+		JIZERO		NEXT8
+ABS68		MULTIPLY 	-1
+		JINEG		ABS68
+		SUBTRACT	2
+		JIZERO		NEXT8
+
+		LOAD		Q7
+		SUBTRACT 	Q8
+		JIZERO		NEXT8
+ABS78		MULTIPLY 	-1
+		JINEG		ABS78
+		SUBTRACT	1
+		JIZERO		NEXT8
+
+* Print out the solution number
+
+		LOAD		COUNT
+		ADD		1
+		STORE		COUNT
+
+		PRINT		"Solution: "
+		OUT
+		LINE
+		LINE
+
+* And an image of the board layout
+
+		LOAD		8
+NEXTROW	STORE		ROW
+
+		LOAD		Q1
+		SUBTRACT	ROW
+		JIZERO		STAR1
+		PRINT		"."
+CONT1		LOAD		Q2
+		SUBTRACT	ROW
+		JIZERO		STAR2
+		PRINT		"."
+CONT2		LOAD		Q3
+		SUBTRACT	ROW
+		JIZERO		STAR3
+		PRINT		"."
+CONT3		LOAD		Q4
+		SUBTRACT	ROW
+		JIZERO		STAR4
+		PRINT		"."
+CONT4		LOAD		Q5
+		SUBTRACT	ROW
+		JIZERO		STAR5
+		PRINT		"."
+CONT5		LOAD		Q6
+		SUBTRACT	ROW
+		JIZERO		STAR6
+		PRINT		"."
+CONT6		LOAD		Q7
+		SUBTRACT	ROW
+		JIZERO		STAR7
+		PRINT		"."
+CONT7		LOAD		Q8
+		SUBTRACT	ROW
+		JIZERO		STAR8
+		PRINT		"."
+
+CONT8		LINE
+		LOAD		ROW
+		SUBTRACT	1
+		JIZERO		NEXTMOVE
+		JUMP		NEXTROW
+
+
+STAR1		PRINT		"Q"
+		JUMP		CONT1
+STAR2		PRINT		"Q"
+		JUMP		CONT2
+STAR3		PRINT		"Q"
+		JUMP		CONT3
+STAR4		PRINT		"Q"
+		JUMP		CONT4
+STAR5		PRINT		"Q"
+		JUMP		CONT5
+STAR6		PRINT		"Q"
+		JUMP		CONT6
+STAR7		PRINT		"Q"
+		JUMP		CONT7
+STAR8		PRINT		"Q"
+		JUMP		CONT8
+
+* Finished printing the board, search for next solution
+
+NEXTMOVE	LINE
+
+* Move Q8 to the next square
+
+NEXT8		LOAD		Q8
+		SUBTRACT	1
+		STORE		Q8
+		JIZERO		NEXT7
+		JUMP		LOOP8
+
+* Move Q7 to the next square
+
+NEXT7		LOAD		Q7
+		SUBTRACT	1
+		STORE		Q7
+		JIZERO		NEXT6
+		JUMP		LOOP7
+
+* Move Q6 to the next square
+
+NEXT6		LOAD		Q6
+		SUBTRACT	1
+		STORE		Q6
+		JIZERO		NEXT5
+		JUMP		LOOP6
+
+* Move Q5 to the next square
+
+NEXT5		LOAD		Q5
+		SUBTRACT	1
+		STORE		Q5
+		JIZERO		NEXT4
+		JUMP		LOOP5
+
+* Move Q4 to the next square
+
+NEXT4		LOAD		Q4
+		SUBTRACT	1
+		STORE		Q4
+		JIZERO		NEXT3
+		JUMP		LOOP4
+
+* Move Q3 to the next square
+
+NEXT3		LOAD		Q3
+		SUBTRACT	1
+		STORE		Q3
+		JIZERO		NEXT2
+		JUMP		LOOP3
+
+* Move Q2 to the next square
+
+NEXT2		LOAD		Q2
+		SUBTRACT	1
+		STORE		Q2
+		JIZERO		NEXT1
+		JUMP		LOOP2
+
+* Move Q1 to the next square
+
+NEXT1		LOAD		Q1
+		SUBTRACT	1
+		STORE		Q1
+		JIZERO		DONE
+		JUMP		LOOP1
+
+* All done
+
+DONE		PRINT		"Done"
+		LINE
+		HALT

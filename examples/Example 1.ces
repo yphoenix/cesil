@@ -1,0 +1,26 @@
+* Example 1: Add a list of numbers terminated by a negative number
+*
+* Copyright (C)2002-2003 Andrew Jacobs
+* All rights reserved.
+
+	LOAD	0
+LOOP	STORE	TOTAL
+	IN
+	JINEG	DONE
+	PRINT	"Item: "
+	OUT
+	LINE
+	ADD	TOTAL
+	JUMP	LOOP
+
+DONE	PRINT 	"The total is "
+	LOAD	TOTAL
+	OUT
+	LINE
+	HALT
+
+	%
+	1
+	2
+	3
+	-1

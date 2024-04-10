@@ -1,0 +1,171 @@
+* Easter calculator
+* CESIL Code (c) S Robinson, 2003
+* Based on formulae from http://www.almanac.com/edpicks/easterformula.html
+
+Next	IN
+	JINEG End
+	STORE Year
+
+* Step 1
+* a = Year mod 19
+
+	LOAD Year
+	STORE Num
+	DIVIDE 19
+	MULTIPLY 19
+	SUBTRACT Num
+	MULTIPLY -1
+	STORE a
+
+* Step 2
+* b = Year / 100
+* c = Year mod 100
+
+	LOAD Year
+	STORE Num
+	DIVIDE 100
+	STORE b
+	MULTIPLY 100
+	SUBTRACT Num
+	MULTIPLY -1
+	STORE c
+
+* Step 3
+* d = b / 4
+* e = b mod 4
+
+	LOAD b
+	STORE Num
+	DIVIDE 4
+	STORE d
+	MULTIPLY 4
+	SUBTRACT Num
+	MULTIPLY -1
+	STORE e
+
+* Step 4
+* f = (b+8) mod 25
+
+	LOAD b
+	ADD 8
+	STORE Num
+	DIVIDE 25
+	MULTIPLY 25
+	SUBTRACT Num
+	MULTIPLY -1
+	STORE f
+
+* Step 5
+* g = (b-f+1) / 3
+
+	LOAD b
+	SUBTRACT f
+	Add 1
+	DIVIDE 3
+	STORE g
+
+* Step 6
+* h = (19a+b-d-g+15) mod 30
+
+	LOAD a
+	MULTIPLY 19
+	ADD b
+	SUBTRACT d
+	SUBTRACT g
+	ADD 15
+	STORE Num
+	DIVIDE 30
+	MULTIPLY 30
+	SUBTRACT Num
+	MULTIPLY -1
+	STORE h
+
+* Step 7
+* i = c / 4
+* j = c mod 4
+
+	LOAD c
+	STORE Num
+	DIVIDE 4
+	STORE i
+	MULTIPLY 4
+	SUBTRACT Num
+	MULTIPLY -1
+	STORE j
+
+* Step 8
+* k = [2x(e+i)-h-j+32] mod 7
+
+	LOAD e
+	ADD i
+	MULTIPLY 2
+	SUBTRACT h
+	SUBTRACT j
+	ADD 32
+	STORE Num
+	DIVIDE 7
+	MULTIPLY 7
+	SUBTRACT Num
+	MULTIPLY -1
+	STORE k
+
+* Step 9
+* L = [11x(2k+h)+a] / 451 (uses Upper case L to distinguish from 1)
+
+	LOAD k
+	MULTIPLY 2
+	ADD h
+	MULTIPLY 11
+	ADD a
+	DIVIDE 451
+	STORE L
+
+* Step 10
+* Month = (-7L+h+k+114) / 31
+* Date  = (-7L+h+k+114) div 31 + 1
+
+	LOAD L
+	MULTIPLY -7
+	ADD h
+	ADD k
+	ADD 114
+	STORE Num
+	DIVIDE 31
+	STORE Month
+	MULTIPLY 31
+	SUBTRACT Num
+	MULTIPLY -1
+	ADD 1
+	STORE Date
+
+* Output
+	PRINT "In "
+	LOAD Year
+	OUT
+	PRINT ", Easter day was/will be on "
+	LOAD Date
+	OUT
+	LOAD Month
+	SUBTRACT 4
+	JIZERO April
+	PRINT " March."
+	JUMP March
+
+April	PRINT " April."
+
+March	LINE
+	JUMP Next
+
+End	HALT
+
+* Data - years must be in Gregorian calendar, terminated with negative value
+	%
+	1943
+	1967
+	1994
+	2003
+	2004
+	2023
+	2024
+	2025
+	-1

@@ -1,0 +1,127 @@
+* Example 5: Converting from Roman Numerals
+*
+* Copyright (C)2003 Andrew Jacobs
+* All rights reserved.
+
+* Initialise the result
+
+	LOAD	0
+	STORE	VALUE
+
+* Read the next value and check for the end.
+	
+READ	IN
+	JINEG	DONE
+	STORE	DIGIT
+
+* Is it a digit that might need subtracting?
+
+	SUBTRACT 1
+	JIZERO	READI
+	SUBTRACT 9
+	JIZERO READX
+	SUBTRACT 90
+	JIZERO READC
+
+* Add the value of a normal digit to the total
+
+	LOAD	VALUE
+	ADD	DIGIT
+	STORE	VALUE
+	LOAD	DIGIT
+
+* Then, display the digit we just processed
+
+PRINT	SUBTRACT 1
+	JIZERO	I
+	SUBTRACT 4
+	JIZERO V
+	SUBTRACT 5
+	JIZERO X
+	SUBTRACT 40
+	JIZERO	L
+	SUBTRACT 50
+	JIZERO C
+	SUBTRACT 400
+	JIZERO D
+	SUBTRACT 500
+	JIZERO M
+	PRINT "?"
+	JUMP	READ
+
+I	PRINT	"I"
+	JUMP	READ
+
+V	PRINT	"V"
+	JUMP	READ
+
+X	PRINT	"X"
+	JUMP	READ
+
+L	PRINT	"L"
+	JUMP	READ
+
+C	PRINT	"C"
+	JUMP	READ
+
+D	PRINT 	"D"
+	JUMP	READ
+
+M	PRINT	"M"
+	JUMP	READ
+
+* If we read a C,X or I print it then, look at the next digit
+
+READC	PRINT	"C"
+	JUMP	LOOK
+
+READX	PRINT	"X"
+	JUMP	LOOK
+
+READI	PRINT	"I"
+
+LOOK	IN
+	STORE	AHEAD
+
+* If its smaller add both to the total then print the second
+
+	LOAD	DIGIT
+	SUBTRACT AHEAD
+	JINEG	LESS
+
+	LOAD	VALUE
+	ADD	DIGIT
+ADDIN	ADD	AHEAD
+	STORE	VALUE
+
+	LOAD	AHEAD
+	JUMP	PRINT
+
+* If its bigger subtract the first then add and print the second
+
+LESS	LOAD	VALUE
+	SUBTRACT DIGIT
+	JUMP	ADDIN
+
+* Finish printing the result
+
+DONE	PRINT	" = "
+	LOAD 	VALUE
+	OUT
+	LINE
+	HALT
+
+* CESIL can't handle characters so the digits in the numeral
+* are expressed as their decimal values with a -1 at the end
+*
+* ( M = 1000, D = 500, C = 100, L = 10, V = 5, I = 1)
+
+	%
+	1000
+	100
+	1000
+	10
+	100
+	1
+	10
+	-1
