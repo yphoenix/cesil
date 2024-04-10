@@ -2,6 +2,8 @@
 CESIL Language Interpreter in JavaScript
 
 ## Install
+You need node, which you can get from: https://nodejs.org/
+
 ### Globally
 ```
 npm install -g cesil
