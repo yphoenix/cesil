@@ -1,14 +1,14 @@
 {
   "name": "cesil",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CESIL Interpreter",
   "license": "MIT",
-  "author": "Yorick Phoenix <yphoenix@scribblings.com>",
+  "author": "Yorick Phoenix",
   "main": "src/cesil.js",
   "type": "module",
   "devDependencies": {
     "@biomejs/biome": "1.6.4",
-	"@eslint/config-inspector": "^0.4.3",
+    "@eslint/config-inspector": "^0.4.3",
     "eslint": "^9.0.0",
     "eslint-plugin-jsdoc": "^48.2.3",
     "eslint-plugin-new-with-error": "^5.0.0",
@@ -26,7 +26,6 @@
   "keywords": [
     "cesil"
   ],
-  "author": "Yorick Phoenix",
   "bugs": {
     "url": "https://github.com/yphoenix/cesil/issues"
   },
