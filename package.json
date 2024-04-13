@@ -1,6 +1,6 @@
 {
   "name": "cesil",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "CESIL Interpreter",
   "license": "MIT",
   "author": "Yorick Phoenix",
@@ -8,12 +8,12 @@
   "type": "module",
   "devDependencies": {
     "@biomejs/biome": "1.6.4",
-    "@eslint/config-inspector": "^0.4.3",
+    "@eslint/config-inspector": "^0.4.6",
     "eslint": "^9.0.0",
     "eslint-plugin-jsdoc": "^48.2.3",
     "eslint-plugin-new-with-error": "^5.0.0",
     "eslint-plugin-no-use-extend-native": "^0.5.0",
-    "oxlint": "^0.2.16"
+    "oxlint": "^0.2.17"
   },
   "scripts": {
     "oxlint": "oxlint -D all -A restriction -A pedantic -A style -A nursery -A prefer-add-event-listener -A no-document-cookie -A no-new-array --ignore-pattern=**/node_modules/**",

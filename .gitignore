@@ -1,5 +1,7 @@
+.git
 .DS_Store
 .nova
 composer.lock
 node_modules
 package-lock.json
+bun.lockb

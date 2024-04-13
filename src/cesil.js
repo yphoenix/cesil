@@ -17,8 +17,13 @@ const version = '1.0';
 
 function Debug()
 {
-	// console.log(...arguments);
+	if (Debug.debug)
+	{
+		console.log(...arguments);
+	}
 }
+
+Debug.debug = false;
 
 export default class Cesil
 {
@@ -33,8 +38,9 @@ export default class Cesil
 	{
 		if (argv.length < 3)
 		{
-			console.log('cesil <file>.ces')
 			console.log('cesil --version')
+			console.log('cesil <file>.ces')
+			console.log('cesil --debug <file>.ces')
 		}
 		else
 		{
@@ -43,6 +49,12 @@ export default class Cesil
 				case '--version':
 					console.log('cesil v' + version);
 					break
+
+				case '--debug':
+					Debug.debug = true;
+					console.log(Debug.debug);
+					argv.shift();
+					// Fall Through
 
 				default:
 					Cesil.Execute(argv[2]);
@@ -85,6 +97,16 @@ export default class Cesil
 
 	static ParseLine(line, code, data)
 	{
+		const firstChar = line[0] ?? '';
+
+		// Ignore blank & comment lines
+
+		if (line.trim() === '' ||
+			['*', '('].indexOf(firstChar) !== -1)
+		{
+			return;
+		}
+
 		const parts = line.split(/\s+/);
 
 		const label = parts.shift();
@@ -93,41 +115,34 @@ export default class Cesil
 		let arg = line.slice(label.length);
 		arg = arg.slice(arg.indexOf(inst) + inst.length).trim();
 
-		// Skip Comment lines
-
-		if ((label[0] ?? '') !== '*' &&
-			(label[0] ?? '') !== '(')
+		if (label !== '')
 		{
-			if (label !== '')
-			{
-				Cesil.parseLabel = label;
+			Cesil.parseLabel = label;
 
-				code[Cesil.parseLabel] ??= [];
+			code[Cesil.parseLabel] ??= [];
+		}
+
+		if (inst !== '')
+		{
+			if (inst === '%')
+			{
+				Cesil.parsingData = true;
 			}
-
-			if (inst !== '' ||
-				arg !== '')
+			else
+			if (Cesil.parsingData)
 			{
-				if (inst === '%')
+				if (Number.isInteger(Number.parseInt(inst, 10)))
 				{
-					Cesil.parsingData = true;
+					data.push(Number.parseInt(inst, 10));
 				}
 				else
-				if (Cesil.parsingData)
 				{
-					if (Number.isInteger(Number.parseInt(inst, 10)))
-					{
-						data.push(Number.parseInt(inst, 10));
-					}
-					else
-					{
-						data.push(inst);
-					}
-    			}
-				else
-				{
-					code[Cesil.parseLabel].push([inst.toUpperCase(), arg]);
+					data.push(inst);
 				}
+			}
+			else
+			{
+				code[Cesil.parseLabel].push([inst.toUpperCase(), arg]);
 			}
 		}
 	}
@@ -311,21 +326,21 @@ export default class Cesil
 							jumping = true;
 							break;
 
-						case 'JSR':
+						case 'JSR':		// Jump to Subroutine
 							stack.push([blockIdx, idx]);
 							blockIdx = FindLable(arg);
 							idx = 0;
 							jumping = true;
 							break;
 
-						case 'RET':
+						case 'RET':		// Return from Subroutine
 							ret = stack.pop();
 							blockIdx = ret[0];
 							idx = ret[1] + 1;
 							jumping = true;
 							break;
 
-						case 'HALT':
+						case 'HALT':	// Stop Execution
 							stop = true;
 							break;
 
