@@ -13,7 +13,7 @@ import { argv } from 'node:process';
 import fs       from 'node:fs';
 import readline from 'node:readline';
 
-const version = '1.0';
+const version = '1.0.5';
 
 function Debug()
 {
@@ -71,8 +71,10 @@ export default class Cesil
 
 	static Execute(file)
 	{
-		const code = {[Cesil.parseLabel]: []};
+		const code = new Map();
 		const data = [];
+
+		code.set(Cesil.parseLabel, []);
 
 		const input = readline.createInterface(
 						{
@@ -119,7 +121,12 @@ export default class Cesil
 		{
 			Cesil.parseLabel = label;
 
-			code[Cesil.parseLabel] ??= [];
+			if (code.get(label) !== undefined)
+			{
+    			throw new Error('Duplicate label: "' + label + '"');
+			}
+
+			code.set(label, []);
 		}
 
 		if (inst !== '')
@@ -142,7 +149,8 @@ export default class Cesil
 			}
 			else
 			{
-				code[Cesil.parseLabel].push([inst.toUpperCase(), arg]);
+				code.get(Cesil.parseLabel)
+					.push([inst.toUpperCase(), arg]);
 			}
 		}
 	}
@@ -158,12 +166,12 @@ export default class Cesil
 	{
 		let stop = false;
 
-		const store = {}
+		const store = new Map();
 		const stack = [];
 
 		Debug(code);
 
-		const blocks = Object.keys(code);
+		const blocks = [...code.keys()];
 
 		Debug(blocks);
 
@@ -209,7 +217,7 @@ export default class Cesil
 
 			if (!Number.isInteger(res))
 			{
-				res = store[arg];
+				res = store.get(arg);
 
 				if (res === undefined)
 				{
@@ -229,7 +237,7 @@ export default class Cesil
 
 		function SetValue(name, val)
 		{
-			store[name] = val;
+			store.set(name, val);
 		}
 
 		try
@@ -245,7 +253,7 @@ export default class Cesil
 					throw new Error('RAN OUT OF CODE');
 				}
 
-				const codeBlock = code[curBlock];
+				const codeBlock = code.get(curBlock);
 
 				let jumping = false;
 
