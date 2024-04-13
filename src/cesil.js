@@ -117,7 +117,8 @@ export default class Cesil
 		let arg = line.slice(label.length);
 		arg = arg.slice(arg.indexOf(inst) + inst.length).trim();
 
-		if (label !== '')
+		if (label !== '' &&
+			label !== '%')
 		{
 			Cesil.parseLabel = label;
 
@@ -129,23 +130,36 @@ export default class Cesil
 			code.set(label, []);
 		}
 
-		if (inst !== '')
+		if (label == '%' ||
+			inst !== '')
 		{
-			if (inst === '%')
+			if (label === '%' ||
+				inst === '%')
 			{
 				Cesil.parsingData = true;
 			}
 			else
 			if (Cesil.parsingData)
 			{
-				if (Number.isInteger(Number.parseInt(inst, 10)))
-				{
-					data.push(Number.parseInt(inst, 10));
-				}
-				else
-				{
-					data.push(inst);
-				}
+				const vals = line.trim().split(' ');
+
+				vals.forEach(
+					(val) =>
+					{
+						if (val !== '')
+						{
+							const intVal = Number.parseInt(val, 10);
+
+							if (Number.isInteger(intVal))
+							{
+								data.push(intVal);
+							}
+							else
+							{
+    							throw new Error('Non-Numeric input value');
+							}
+						}
+					});
 			}
 			else
 			{
