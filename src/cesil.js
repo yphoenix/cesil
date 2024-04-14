@@ -13,7 +13,7 @@ import { argv } from 'node:process';
 import fs       from 'node:fs';
 import readline from 'node:readline';
 
-const version = '1.0.5';
+const version = '1.0.7';
 
 function Debug()
 {
@@ -82,7 +82,7 @@ export default class Cesil
 							crlfDelay: Number.Infinity,
 						});
 
-		input.on('error', () => console.log('Failed to read the file: "' + file + '"'));
+		input.on('error', () => console.log('*** FAILED TO READ THE FILE: "' + file + '" ***'));
 
 		input.on('line', (line) => Cesil.ParseLine(line, code, data));
 
@@ -124,7 +124,7 @@ export default class Cesil
 
 			if (code.get(label) !== undefined)
 			{
-    			throw new Error('Duplicate label: "' + label + '"');
+    			throw new Error('*** DUPLICATE LABEL: "' + label + '" ***');
 			}
 
 			code.set(label, []);
@@ -156,7 +156,7 @@ export default class Cesil
 							}
 							else
 							{
-    							throw new Error('Non-Numeric input value');
+    							throw new Error('*** NON-NUMERIC INPUT VALUE ***');
 							}
 						}
 					});
@@ -209,7 +209,7 @@ export default class Cesil
 
 			if (blockIdx === -1)
 			{
-				throw new Error('LABEL: "' + label + '" NOT FOUND');
+				throw new Error('*** LABEL: "' + label + '" NOT FOUND ***');
 			}
 
 			return blockIdx;
@@ -235,7 +235,7 @@ export default class Cesil
 
 				if (res === undefined)
 				{
-					throw new Error('DATA STORE "' + arg + '" DOESN\'T EXIST');
+					throw new Error('*** DATA STORE "' + arg + '" DOESN\'T EXIST ***');
 				}
 			}
 
@@ -264,7 +264,7 @@ export default class Cesil
 
 				if (curBlock === undefined)
 				{
-					throw new Error('RAN OUT OF CODE');
+					throw new Error('*** RAN OUT OF CODE ***');
 				}
 
 				const codeBlock = code.get(curBlock);
@@ -273,7 +273,7 @@ export default class Cesil
 
 				while (idx < codeBlock.length)
 				{
-					let ret;
+					let ret, divisor;
 
 					const line = codeBlock[idx];
 
@@ -329,7 +329,12 @@ export default class Cesil
 							break;
 
 						case 'DIVIDE':
-							acc = acc / GetValue(arg);
+							divisor = GetValue(arg);
+							if (divisor === 0)
+							{
+								throw new Error('*** DIVISION BY ZERO ***');
+							}
+							acc = acc / divisor;
 							acc = acc > 0 ? Math.floor(acc) : Math.ceil(acc);
 							break;
 
@@ -367,7 +372,7 @@ export default class Cesil
 							break;
 
 						default:
-							throw new Error('UNKNOWN INSTRUCTION: "' + cmd + '"');
+							throw new Error('*** UNKNOWN INSTRUCTION: "' + cmd + '" ***');
 					}
 
 					if (stop || jumping)
