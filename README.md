@@ -19,11 +19,9 @@ npm install cesil
 ```
 ### Run (locally)
 ```
-npm run cesil file.ces
-
-// or
-
-node src/cesilCLI.js file.ces
+1. npm run cesil file.ces
+2. node src/cesilCLI.js file.ces
+3. bun src/cesilCLI.js file.css
 ```
 
 ## Language information
@@ -41,3 +39,7 @@ This implementation of CESIL supports
 ### Example files
 
 Can be found in the examples folder or at: https://github.com/yphoenix/cesil/tree/main/examples
+
+### License
+
+MIT
