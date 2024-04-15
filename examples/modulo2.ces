@@ -1,0 +1,41 @@
+LOOP    IN
+        JINEG       END
+        STORE       NUMER
+        IN
+        STORE       DENOM
+        LOAD        NUMER
+        PRINT       "SUM: "
+        OUT
+        PRINT       " divides into "
+        LOAD        DENOM
+        OUT
+        PRINT       " a total of "
+        LOAD        NUMER
+        DIVIDE      DENOM
+        OUT
+        PRINT       " time"
+        SUBTRACT	1
+        JIZERO		SINGLE
+        PRINT		"s"
+
+SINGLE  ADD			1
+		PRINT		" and has a remainder of "
+        MULTIPLY    DENOM
+        STORE       EXACTVAL
+        LOAD        NUMER
+        SUBTRACT    EXACTVAL
+        OUT
+        PRINT       "."
+        LINE
+        JUMP        LOOP
+
+END     HALT
+
+        %
+        16
+        6
+        2117
+        3
+        18
+        16
+        -1
